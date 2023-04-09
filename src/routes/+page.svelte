@@ -1,7 +1,5 @@
 <script>
     import cover_page_logo from '../images/cover_page.png'
-    import demo from '../images/demo.jpg';
-    import classic from '../images/classic.jpg';
     import '../icons/icofont/icofont.min.css'
     import {appStore, database} from '../store';
     import {db} from '../fb'
@@ -34,7 +32,7 @@
         <div class="head_one"><div class="logo"><img src={cover_page_logo} alt=""></div>
         <div class="title">Coverpages</div>
         </div>
-        <div class="head_two">See all</div>
+        <div style="display:none" class="head_two">See all</div>
     </div>
     <div class="menu_items">
         {#each models as model, index}

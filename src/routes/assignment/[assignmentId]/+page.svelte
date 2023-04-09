@@ -1,12 +1,13 @@
 <script>
   import {database, appStore} from '../../../store';
-  import Modern, { generate } from "../../../components/designs/assignments/Modern.svelte";
-  import Classic, { generate_classic } from "../../../components/designs/assignments/Classic.svelte";
-  import Payra, { generate_payra } from '../../../components/designs/assignments/Payra.svelte';
+  import Modern from "../../../components/designs/assignments/Modern.svelte";
+  import Classic from "../../../components/designs/assignments/Classic.svelte";
+  import Payra from '../../../components/designs/assignments/Payra.svelte';
   import { page } from '$app/stores'
   import {db} from '../../../fb'
   import { ref, set, onValue, update} from 'firebase/database';
-  
+  import { onMount } from 'svelte';
+
   const params = $page.params.assignmentId
   let assignmentId = params.split('_')[0];
   let assignment_title = params.split('_')[1]
@@ -18,19 +19,26 @@
         modelsData = value.assignments;
     });
    }
+  //  let func1;
+  //  onMount(()=>{
+  //   func1 = function(){
+  //     Modern.generate()
+  //   }
+  //   console.log(func1);
+  //  })
 
- const models = {
+  //  console.log(Modern)
+  
+  let bindFunction;
+
+ let models = {
   "1": {
-      func: generate,
       model: Modern,
-
   },
   "2": {
-     func: generate_classic,
      model: Classic
   },
   "3": {
-    func: generate_payra,
     model: Payra
   }
  }
@@ -190,14 +198,14 @@
   </div>
  
    <!-- svelte-ignore a11y-click-events-have-key-events -->
-   <center><div on:click={()=>{models[assignmentId].func(info); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
+   <center><div on:click={()=>{bindFunction.generate(info); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
   </form>
 </div>
 
 
 <!-- <Classic myinfo={{...info}}/> -->
 
- <svelte:component this={models[assignmentId].model} myinfo={{...info}} />
+ <svelte:component bind:this={bindFunction} this={models[assignmentId].model} myinfo={{...info}} />
 </div>
 
 <style>

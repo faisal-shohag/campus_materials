@@ -1,6 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
-
     import brur from '../../../images/brur.jpeg'
     import toast, {Toaster}  from "svelte-french-toast"
     export let myinfo = {
@@ -26,44 +24,6 @@
     submission_date: '',
     color: '#B12BAA'
   }
-/*
-  let query = "(max-width: 540px)"
-
-  let mql;
-    let mqlListener;
-    let wasMounted = false;
-    let matches = false;
-    
-    let assignment;
-
-    onMount(() => {
-        wasMounted = true;
-        return () => {
-            removeActiveListener();
-        };
-      
-    });
-
-    $: {
-        if (wasMounted) {
-            removeActiveListener();
-            addNewListener(query);
-        }
-    }
-
-    function addNewListener(query) {
-        mql = window.matchMedia(query);
-        mqlListener = v => matches = v.matches;
-        mql.addListener(mqlListener);
-        matches = mql.matches;
-    }
-
-    function removeActiveListener() {
-        if (mql && mqlListener) {
-            mql.removeListener(mqlListener);
-        }
-    }
- */
 
  let screenSize;
  $: {
@@ -71,29 +31,26 @@
         assignment.style.maxWidth="55em"
         assignment.style.padding="0 0 0 0"
         assignment.style.margin="0 0"
+    } else if(screenSize<=600){
+        assignment.classList.add("zoom50");
     }
   }
 
-</script>
 
-<script context="module">
-  let assignment;
-  let screenSize;
 
-  
-  
-    export let generate = async(info) =>{
-
-    
-    let check = Object.values(info).some(item=>item==='')
-    if(check){
-      toast.error("Please fill all the fields!", {
-        style: 'background: #333; color: #eee'
-      })
-    }else {  
-           if(screenSize<=600) {
-            assignment.style="zoom: 0%";
-            }
+let assignment;
+export async function generate(info){
+        if(screenSize<=600){
+            assignment.classList.remove("zoom50");
+            assignment.classList.add("zoom0")
+        }
+        let check = false//Object.values(info).some(item=>item==='')
+        if(check){
+        toast.error("Please fill all the fields!", {
+            style: 'background: #333; color: #eee'
+        });
+        
+        }else {  
             console.log('Loading...');
             try{
                  await html2pdf(assignment, {
@@ -102,38 +59,23 @@
                 html2canvas: { scale: 2},
                 jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' }
             });
-            if(screenSize<=600) {
-             assignment.style="zoom: 50%";
-            }
+            if(screenSize<=600){
+                assignment.classList.remove("zoom0");
+                assignment.classList.add("zoom50")
+             }
             } catch(err) {
                 toast.error(`Something went wrong...!`)
                 console.log(err);
             }
-           
-        
     }
-    // let getCanvas;
-    // html2canvas(assignment, {
-    //     onrendered: (canvas)=>{
-    //         image_prev.append(canvas);
-    //         getCanvas = canvas;
-    //         console.log(getCanvas);
-    //         canvas.style.width = "100%";
-    //         link.href = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream");
-    //         console.log(link.href);
-    //     }
-    // })
-  
-    // let imageData = getCanvas.toDataURL("image/png")
-    // let newData = imageData.replace(/^data:image/," data: application/octet-stream");
-    // link.attr("download", "Assignment.png").attr("href", newData);
   }
- 
- 
+
 </script>
+
+
 <svelte:window bind:innerWidth={screenSize}/>
 <Toaster/>
-<div bind:this={assignment} class="assignment">
+<div  bind:this={assignment} class="assignment">
     <div class="credit">brurcoverpage.netlify.app</div>
     <div class="abody">
     <div class="alogo"><img alt="" src={brur}/></div>
@@ -188,19 +130,14 @@
     position: relative;
     }
 
-    .credit{
-        position: absolute;
-        font-size: 8px;
-        transform: rotate(90deg);
-        right: -5%;
-        bottom: 10%;
-    }
+  
 
-    @media only screen and (max-width: 540px) {
+ 
+    /* @media only screen and (max-width: 540px) {
     .assignment {
         zoom: 50%;
      }
-    }
+    } */
 
     .t_td{
         position: absolute;
