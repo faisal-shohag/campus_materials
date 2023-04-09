@@ -190,7 +190,7 @@
   </div>
  
    <!-- svelte-ignore a11y-click-events-have-key-events -->
-   <center><div on:click={()=>{generate_classic(info); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
+   <center><div on:click={()=>{models[assignmentId].func(info); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
   </form>
 </div>
 

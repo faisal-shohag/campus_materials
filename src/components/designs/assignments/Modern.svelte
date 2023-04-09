@@ -96,7 +96,7 @@
             }
             console.log('Loading...');
             try{
-                let res = await html2pdf(assignment, {
+                 await html2pdf(assignment, {
                 filename: `${info.id}_${info.course_title}.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2},
@@ -134,6 +134,7 @@
 <svelte:window bind:innerWidth={screenSize}/>
 <Toaster/>
 <div bind:this={assignment} class="assignment">
+    <div class="credit">brurcoverpage.netlify.app</div>
     <div class="abody">
     <div class="alogo"><img alt="" src={brur}/></div>
     <div class="auni">Begum Rokeya University, Rangpur</div>
@@ -184,6 +185,15 @@
     padding: 1em 1em 1em 1em;
     margin: 0em auto;
     /* zoom: 50%; */
+    position: relative;
+    }
+
+    .credit{
+        position: absolute;
+        font-size: 8px;
+        transform: rotate(90deg);
+        right: -5%;
+        bottom: 10%;
     }
 
     @media only screen and (max-width: 540px) {
