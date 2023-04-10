@@ -30,3 +30,19 @@
 .margin{
     margin-top: 70px;
 }
+
+.footer{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    font-family: Hind Siliguri;
+    color: black;
+    }
+    
+    .footer img{
+        height: 28px;
+    }

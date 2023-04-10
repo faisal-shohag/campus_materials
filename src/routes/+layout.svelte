@@ -1,6 +1,7 @@
 <script>
   import "../app.css";
   import logo from "../images/logo.png";
+  import github from '../images/github.png';
   import { appStore, database } from ".././store";
   import { fly } from "svelte/transition";
   import { backOut } from "svelte/easing";
@@ -8,7 +9,7 @@
   import { onMount } from "svelte";
   import { db } from "../fb";
   import { ref, set, onValue, update } from "firebase/database";
-
+  
   let title;
   appStore.subscribe((value) => {
     title = value.title;
@@ -20,9 +21,7 @@
     });
   });
 
-  //     db.ref('cover_pages/assignment').on('value', snap=>{
-  //       database.set({assignments: snap.val()})
-  //    });
+
 </script>
 
 <svelte:head>
@@ -62,3 +61,9 @@
 <div class="nav_and_body">
   <slot />
 </div>
+
+
+<a href="https://github.com/faisal-shohag/campus_materials"><div class="footer">
+<div class="img"><img src={github} alt=""/></div>
+<div class="author">F|S</div>
+</div></a>
