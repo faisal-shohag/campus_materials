@@ -4,7 +4,7 @@
   import github from '../images/github.png';
   import { appStore, database } from ".././store";
   import { fly } from "svelte/transition";
-  import { backOut } from "svelte/easing";
+  import { backIn, backOut } from "svelte/easing";
   import { page } from "$app/stores";
   import { onMount } from "svelte";
   import { db } from "../fb";
@@ -15,10 +15,13 @@
     title = value.title;
   });
 
+  let start = false;
+
   onMount(() => {
     onValue(ref(db, "cover_pages/assignment"), (snap) => {
       database.set({ assignments: snap.val() });
     });
+    start = true;
   });
 
 
@@ -64,6 +67,21 @@
 
 
 <a href="https://github.com/faisal-shohag/campus_materials"><div class="footer">
-<div class="img"><img src={github} alt=""/></div>
-<div class="author">F|S</div>
+{#if start}
+{#key $page}
+<div in:fly={{
+    y: 20,
+    easing: backOut,
+    delay: 100,
+    duration: 500
+    }} class="img"><img src={github} alt=""/></div>
+   <div in:fly={{
+        x: -20,
+        easing: backOut,
+        delay: 300,
+        duration: 600
+        }} class="author">F|S</div>
+    {/key}
+  {/if}
+
 </div></a>
