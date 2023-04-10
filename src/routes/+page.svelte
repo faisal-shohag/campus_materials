@@ -1,10 +1,11 @@
 <script>
     import cover_page_logo from '../images/cover_page.png'
     import '../icons/icofont/icofont.min.css'
-    import {appStore, database} from '../store';
-    import {db} from '../fb'
+    import { appStore, database } from '../store';
+    import { db } from '../fb'
     import { ref, set, onValue, update} from 'firebase/database';
-
+    //import { Diamonds } from "svelte-loading-spinners"
+    import Skeleton from 'svelte-skeleton/Skeleton.svelte'
     appStore.set({title: 'BRUR Materials'});
 
    let models;
@@ -26,7 +27,7 @@
   
 </script>
 
-{#if models.length>0}
+
 <div class="menu">
     <div class="menu_head">
         <div class="head_one"><div class="logo"><img src={cover_page_logo} alt=""></div>
@@ -34,6 +35,8 @@
         </div>
         <div style="display:none" class="head_two">See all</div>
     </div>
+    {#if models.length>0}
+
     <div class="menu_items">
         {#each models as model, index}
         <a on:click={()=>viewCount(index)} href="/assignment/{index+1}_{model.name}"><div class="item">
@@ -50,20 +53,16 @@
          </div>
         </a>
         {/each}
-
-        
-
-
-
-       
-
-        
-
     </div>
-      
-
+    {:else}
+    <div class="flex">
+        <Skeleton height="180" width="360"><rect width="120" height="180" x="0" y="0" rx="12" ry="12" /></Skeleton>
+        <Skeleton height="180" width="360"><rect width="120" height="180" x="0" y="0" rx="12" ry="12" /></Skeleton>
+        <Skeleton height="180" width="360"><rect width="120" height="180" x="0" y="0" rx="12" ry="12" /></Skeleton>
+    </div>
+    {/if}
 </div>
-{/if}
+
 
 
 <style>
@@ -72,6 +71,19 @@
         color: #1e1e1f;
         margin-top: 5px;
     }
+
+    .flex{
+        display: flex;
+        align-items: center;
+    }
+
+    /* .spinner{
+        display: flex;
+        justify-content: center; 
+        align-items: center;
+        height: 100%;
+        align-items: center;
+    } */
     .menu{
         padding: 5px;
         background: rgba(255, 255, 255, 0.24);
@@ -79,7 +91,9 @@
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
         backdrop-filter: blur(6.4px);
         -webkit-backdrop-filter: blur(6.4px);
-        border: 1px solid rgba(255, 255, 255, 0.3);      
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        /* min-height: 200px;      */
+        position: relative;
     }
 
     .menu .menu_head{
@@ -120,7 +134,6 @@
         gap: 10px;
         min-width: 200px;
         overflow-x: scroll;
-        
     }
 
     .menu_items img{
@@ -136,10 +149,13 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        border-radius: 10px;
-        background: #fff;
         padding: 10px;
+        background: rgba(255, 255, 255, 0.24);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(6.4px);
+        -webkit-backdrop-filter: blur(6.4px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .item_menu{

@@ -44,7 +44,7 @@ export async function generate(info){
             assignment.classList.remove("zoom50");
             assignment.classList.add("zoom0")
         }
-        let check = false//Object.values(info).some(item=>item==='')
+        let check = Object.values(info).some(item=>item==='')
         if(check){
         toast.error("Please fill all the fields!", {
             style: 'background: #333; color: #eee'

@@ -19,15 +19,6 @@
         modelsData = value.assignments;
     });
    }
-  //  let func1;
-  //  onMount(()=>{
-  //   func1 = function(){
-  //     Modern.generate()
-  //   }
-  //   console.log(func1);
-  //  })
-
-  //  console.log(Modern)
   
   let bindFunction;
 
@@ -70,7 +61,6 @@
 
    
   let container;
-
   let width;
   let flex = 'no_flex';
   $: {
@@ -94,8 +84,7 @@
             console.log(err);
         }
    }
-
-
+   const dateMe = (date) => {return date.split("-").reverse().join("/")}
   
 </script>
 
@@ -198,14 +187,10 @@
   </div>
  
    <!-- svelte-ignore a11y-click-events-have-key-events -->
-   <center><div on:click={()=>{bindFunction.generate(info); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
+   <center><div on:click={()=>{bindFunction.generate({...info, submission_date: dateMe(info.submission_date)}); downloadCount(parseInt(assignmentId)-1)}} class="btn"><a href="#!">Generate</a></div></center>
   </form>
 </div>
-
-
-<!-- <Classic myinfo={{...info}}/> -->
-
- <svelte:component bind:this={bindFunction} this={models[assignmentId].model} myinfo={{...info}} />
+ <svelte:component bind:this={bindFunction} this={models[assignmentId].model} myinfo={{...info, submission_date: dateMe(info.submission_date)}} />
 </div>
 
 <style>
