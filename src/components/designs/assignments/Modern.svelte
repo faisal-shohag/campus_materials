@@ -47,6 +47,10 @@
       toast.error("Please fill all the fields!", {
         style: "background: #333; color: #eee",
       });
+      if (screenSize <= 600) {
+          assignment.classList.remove("zoom0");
+          assignment.classList.add("zoom50");
+        }
     } else {
       console.log("Loading...");
       try {
