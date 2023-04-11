@@ -46,3 +46,29 @@
     .footer img{
         height: 28px;
     }
+
+    @font-face {
+        font-family: 'Now';
+        src: url('./fonts/Now-Regular.woff2') format('woff2'),
+            url('./fonts/Now-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Now Bold';
+        src: url('./fonts/Now-Bold.woff2') format('woff2'),
+            url('./fonts/Now-Bold.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    .font-now{
+        font-family: Now;
+    }
+
+    .font-now-bold{
+        font-family: Now Bold;
+    }

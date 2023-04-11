@@ -1,6 +1,7 @@
 <script>
   import brur from "../../../images/brur.jpeg";
   import toast, { Toaster } from "svelte-french-toast";
+  import {generatePDF} from "../../../model"
   export let myinfo = {
     //your info
     name: "",
@@ -27,48 +28,14 @@
 
   let screenSize;
   $: {
-    if (screenSize > 700) {
-      assignment.style.maxWidth = "55em";
-      assignment.style.padding = "0 0 0 0";
-      assignment.style.margin = "0 0";
-    } else if (screenSize <= 600) {
+    if (screenSize <= 600) {
       assignment.classList.add("zoom50");
     }
   }
 
   let assignment;
-  export async function generate(info) {
-    if (screenSize <= 600) {
-      assignment.classList.remove("zoom50");
-      assignment.classList.add("zoom0");
-    }
-    let check = Object.values(info).some((item) => item === "");
-    if (check) {
-      toast.error("Please fill all the fields!", {
-        style: "background: #333; color: #eee",
-      });
-      if (screenSize <= 600) {
-          assignment.classList.remove("zoom0");
-          assignment.classList.add("zoom50");
-        }
-    } else {
-      console.log("Loading...");
-      try {
-        await html2pdf(assignment, {
-          filename: `${info.id}_${info.course_title}.pdf`,
-          image: { type: "jpeg", quality: 0.98 },
-          html2canvas: { scale: 2 },
-          jsPDF: { unit: "pt", format: "a4", orientation: "portrait" },
-        });
-        if (screenSize <= 600) {
-          assignment.classList.remove("zoom0");
-          assignment.classList.add("zoom50");
-        }
-      } catch (err) {
-        toast.error(`Something went wrong...!`);
-        console.log(err);
-      }
-    }
+  export async function generate() {
+    generatePDF(assignment, screenSize, myinfo);
   }
 </script>
 

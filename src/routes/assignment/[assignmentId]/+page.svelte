@@ -5,8 +5,10 @@
   import Payra from "../../../components/designs/assignments/Payra.svelte";
   import { page } from "$app/stores";
   import { db } from "../../../fb";
+  import toast, { Toaster } from "svelte-french-toast";
   import { ref, set, onValue, update } from "firebase/database";
   import { onMount } from "svelte";
+  import ReportS23 from "../../../components/designs/assignments/ReportS23.svelte";
 
   const params = $page.params.assignmentId;
   let assignmentId = params.split("_")[0];
@@ -30,7 +32,7 @@
       model: Classic,
     },
     "3": {
-      model: Payra,
+      model: ReportS23,
     },
   };
 
@@ -57,6 +59,19 @@
     submission_date: "",
     color: "#652BB1",
   };
+
+  const checkForm = (info) => {
+    let blank = Object.values(info).some((item) => item === "")
+    if (blank) {
+      toast.error("Please fill all the fields!", {
+        style: "background: #333; color: #eee",
+      });
+    } else {
+      bindFunction.generate();
+     downloadCount(parseInt(assignmentId) - 1);
+    }
+    
+  }
 
   let container;
   let width;
@@ -87,7 +102,7 @@
 </script>
 
 <svelte:window bind:innerWidth={width} />
-
+<Toaster/>
 <div class={flex}>
   <div class="container" bind:this={container}>
     <form>
@@ -211,7 +226,7 @@
       <div class="col-half">
         <div class="input-group">
           <select bind:value={info.teacher_rank}>
-            <option value="" disabled selected>Select Teacher's Rank</option>
+            <option value="" disabled selected>Designation</option>
             <option value="Professor">Professor</option>
             <option value="Associate Professor">Associate Professor</option>
             <option value="Assistant Professor">Assistant Professor</option>
@@ -256,16 +271,11 @@
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <center
         ><div
-          on:click={() => {
-            bindFunction.generate({
-              ...info,
-              submission_date: dateMe(info.submission_date),
-            });
-            downloadCount(parseInt(assignmentId) - 1);
-          }}
+          on:click={()=>checkForm(info)}
           class="btn"
         >
-          <a href="#!">Generate</a>
+          <!-- svelte-ignore a11y-missing-attribute -->
+          <a>Generate</a>
         </div></center
       >
     </form>
