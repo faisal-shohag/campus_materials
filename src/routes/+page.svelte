@@ -215,6 +215,7 @@
 
     .menu_items img {
       height: 150px;
+      min-width: 110px;
     }
   }
 
