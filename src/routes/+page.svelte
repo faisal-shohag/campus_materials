@@ -192,8 +192,8 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
       rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     color: #333;
-    padding-left: 5px;
-    padding-right: 5px;
+    /* padding-left: 5px;
+    padding-right: 5px; */
     padding-bottom: 2px;
     border-radius: 10px;
     align-items: center;
@@ -216,5 +216,11 @@
     .menu_items img {
       height: 150px;
     }
+  }
+
+  .image_demo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>

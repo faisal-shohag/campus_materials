@@ -74,7 +74,7 @@
             <div class="other">Dept. of <b>{textMe(myinfo.dept, "[YOUR DEPT.]")}, </b>BRUR</div>
         </div>
 
-        <div class="subdate">Submission: {textMe(myinfo.submission_date, "19/03/2080")}</div>
+        <div class="subdate">Submission: {textMe(myinfo.submission_date, "[SUBMISSION DATE]")}</div>
     </div>
   </div>
   
