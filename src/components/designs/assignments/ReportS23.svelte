@@ -69,7 +69,7 @@
             <div class="title font-now-bold">Submitted By</div>
             <div class="name">{textMe(myinfo.name, "[YOUR NAME]")}</div>
             <div class="id"><b>ID: {textMe(myinfo.id, "[YOUR ID]")}</b></div>
-            <div class="id"><b>{textMe(myinfo.year, "[YOUR YEAR]")}, {textMe(myinfo.semester, "[YOUR SEMISTER]")}</b></div>
+            <div class="id"><b>{textMe(myinfo.year, "[YOUR YEAR]")}</b> Year, <b>{textMe(myinfo.semester, "[YOUR SEMISTER]")}</b> Semester</div>
             <div class="other"><b>Session: </b>{textMe(myinfo.session, "[YOUR SESSION]")}</div>
             <div class="other">Dept. of <b>{textMe(myinfo.dept, "[YOUR DEPT.]")}, </b>BRUR</div>
         </div>
