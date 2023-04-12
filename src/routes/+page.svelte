@@ -6,12 +6,15 @@
   import { ref, set, onValue, update } from "firebase/database";
   //import { Diamonds } from "svelte-loading-spinners"
   import Skeleton from "svelte-skeleton/Skeleton.svelte";
-  appStore.set({ title: "BRUR Materials" });
+  appStore.set({ title: "Campus Materials" });
 
   let models;
   $: {
     database.subscribe((value) => {
       models = value.assignments;
+      models.sort((a, b)=>{
+        return a.p-b.p;
+      })
     });
   }
 
@@ -39,7 +42,7 @@
       {#each models as model, index}
         <a
           on:click={() => viewCount(index)}
-          href="/assignment/{index + 1}_{model.name}"
+          href="/assignment/{model.index + 1}_{model.name}"
           ><div class="item">
             <div class="image_demo"><img src={model.photo} alt="" /></div>
             <div class="item_menu">

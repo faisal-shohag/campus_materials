@@ -94,6 +94,8 @@
       padding: 1em 1em 1em 1em;
       margin: 0em auto;
       position: relative;
+      /* background: url(../../../images/template_bg/R23_bg.png);
+      background-size: cover; */
     }
     /* .abody {
       gap: 50px;

@@ -9,6 +9,7 @@
   import { ref, set, onValue, update } from "firebase/database";
   import { onMount } from "svelte";
   import ReportS23 from "../../../components/designs/assignments/ReportS23.svelte";
+  import MinimalistRed from "../../../components/designs/assignments/Minimalist_red.svelte";
 
   const params = $page.params.assignmentId;
   let assignmentId = params.split("_")[0];
@@ -34,6 +35,9 @@
     "3": {
       model: ReportS23,
     },
+    "4": {
+      model: MinimalistRed
+    }
   };
 
   let info = {
@@ -292,6 +296,7 @@
     display: flex;
     gap: 10px;
     justify-content: center;
+    /* margin-left: 100px; */
   }
   .color {
     display: flex;
